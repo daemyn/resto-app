@@ -14,7 +14,11 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Lato&display=swap",
+      }
     ]
   },
 
@@ -37,7 +41,25 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
+
+  axios: {
+    baseURL: 'http://localhost:3000/api'
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'auth/login', method: 'post' },
+          user: false,
+          logout: false,
+        },
+      },
+    },
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

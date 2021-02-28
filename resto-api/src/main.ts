@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
     .setTitle('Resto App')
@@ -18,6 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();
