@@ -21,8 +21,18 @@
             <v-btn
               @click="submit"
               dark
-            > Login</v-btn>
+            >
+              Login
+              <v-progress-circular
+                v-show="inProgress"
+                class="ml-2"
+                indeterminate
+                color="white"
+                size="16"
+              ></v-progress-circular>
+            </v-btn>
         </v-layout>
+        <v-alert type="error" class="mt-4 text-left" v-show="errorMessage">{{ errorMessage }}</v-alert>
       </v-form>
     </v-col>
   </v-row>
@@ -43,20 +53,28 @@ export default {
     passwordRules: [
       v => !!v || 'Password is required',
     ],
+    errorMessage: null,
+    inProgress: false,
   }),
   methods: {
     async submit () {
       if(!this.$refs.form.validate()) return;
       try {
+        this.inProgress = true;
         await this.$auth.loginWith('local', {
           data: {
             username: this.username,
             password: this.password,
           },
         });
+        this.inProgress = false;
         this.$router.push('/admin');
       } catch (e) {
-        this.error = e.response.data.message
+        this.inProgress = false;
+        this.errorMessage = 'Authentication failed!';
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 3000);
       }
     },
   },

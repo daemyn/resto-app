@@ -1,46 +1,68 @@
 <template>
   <div>
-    Categories
-    <v-btn @click="debug">debug</v-btn>
 
-    <table class="table table-striped">
+    <h1 class="text-center mt-6 mb-6">CATEGORIES</h1>
+
+    <create-category></create-category>
+
+    <v-simple-table>
+    <template v-slot:default>
       <thead>
         <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>desc</th>
+          <th class="text-left">
+            #
+          </th>
+          <th class="text-left">
+            Name
+          </th>
+          <th class="text-left">
+            Description
+          </th>
+          <th class="text-left">
+            Image
+          </th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="c in list" :key="c._id">
+        <tr
+          v-for="c in list"
+          :key="c._id"
+        >
           <td>{{ c._id }}</td>
           <td>{{ c.name }}</td>
           <td>{{ c.description }}</td>
+          <td>{{ c.image }}</td>
+          <td>
+            <update-category :category=c></update-category>
+            <delete-category :cid=c._id></delete-category>
+          </td>
         </tr>
       </tbody>
-    </table>
+    </template>
+  </v-simple-table>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+import CreateCategory from './create-category.vue';
+import DeleteCategory from './delete-category.vue';
+import UpdateCategory from './update-category.vue';
 
 export default {
   middleware: 'auth',
-  mounted () {
+  components: {
+    CreateCategory,
+    DeleteCategory,
+    UpdateCategory,
+  },
+  mounted() {
     this.$store.dispatch('categories/fetchCategories');
   },
   computed: {
     ...mapState('categories', ['list'])
   },
-  methods: {
-    debug() {
-      this.$store.commit('categories/add', {
-        id: 123,
-        name: 'test',
-        description: 'dexc'
-      })
-    }
-  }
+  methods: {}
 }
 </script>
