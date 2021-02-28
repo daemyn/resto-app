@@ -6,8 +6,15 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CategoriesService } from './categories.service';
 import { CategoryDto } from './dtos/category.dto';
 import { CreateCategoryDto } from './dtos/create-category.dto';
@@ -19,7 +26,9 @@ import { ICategory } from './interfaces/category.interface';
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('/')
+  @ApiBearerAuth()
   @ApiCreatedResponse({
     description: 'The category has been successfully created.',
     type: CategoryDto,
@@ -51,7 +60,9 @@ export class CategoriesController {
     return category;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Find and update a category by ID.',
     type: CategoryDto,
@@ -64,7 +75,9 @@ export class CategoriesController {
     return category;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Removes a category by ID.',
     type: CategoryDto,

@@ -6,20 +6,29 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateItemDto } from './dtos/create-item.dto';
 import { UpdateItemDto } from './dtos/update-item.dto';
 import { ItemDto } from './dtos/item.dto';
 import { ItemsService } from './items.service';
 import { IItem } from './interfaces/item.interface';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('items')
 @Controller('items')
 export class ItemsController {
   constructor(private itemsService: ItemsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('/')
+  @ApiBearerAuth()
   @ApiCreatedResponse({
     description: 'The item has been successfully created.',
     type: ItemDto,
@@ -39,7 +48,9 @@ export class ItemsController {
     return items;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Find and update an item by ID.',
     type: ItemDto,
@@ -52,7 +63,9 @@ export class ItemsController {
     return item;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
+  @ApiBearerAuth()
   @ApiResponse({
     description: 'Removes an item by ID.',
     type: ItemDto,

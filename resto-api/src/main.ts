@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('Resto App')
     .setDescription('Resto App API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('categories')
     .addTag('items')
     .build();
