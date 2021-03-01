@@ -7,7 +7,7 @@ export const mutations = {
     state.list = categories;
   },
   addCategory(state, category) {
-    state.list.push(category)
+    state.list.push(category);
   },
   putCategory(state, category) {
     const index = state.list.findIndex(c => c._id === category._id);

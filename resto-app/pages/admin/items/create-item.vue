@@ -10,13 +10,13 @@
           v-bind="attrs"
           v-on="on"
         >
-          New Category
+          New Item
         </v-btn>
       </template>
 
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          Create a new category
+          Create a new item
         </v-card-title>
 
         <v-card-text class="mt-4">
@@ -32,6 +32,14 @@
               required
             ></v-text-field>
 
+            <v-select
+              v-model="category"
+              :items="selectCategories"
+              :rules="categoryRules"
+              label="Category"
+              required
+            ></v-select>
+
             <v-text-field
               v-model="description"
               label="Description"
@@ -39,10 +47,11 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="image"
-              label="Image"
+              v-model="price"
+              label="Price"
               required
             ></v-text-field>
+
           </v-form>
         </v-card-text>
 
@@ -64,8 +73,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  name: 'create-category',
+  name: 'create-item',
+  mounted() {
+    this.$store.dispatch('categories/fetchCategories');
+  },
+  computed: {
+    ...mapState('categories', ['list']),
+    selectCategories: function() {
+      return this.list.map(c => ({ text: c.name, value: c._id }));
+    },
+  },
   data () {
     return {
       dialog: false,
@@ -74,22 +94,28 @@ export default {
       nameRules: [
         v => !!v || 'Name is required',
       ],
+      categoryRules: [
+        v => !!v || 'Category is required',
+      ],
       description: '',
-      image: '',
+      price: 0,
+      category: '',
     }
   },
   methods: {
     submit() {
       if(!this.$refs.form.validate()) return;
-      this.$store.dispatch('categories/createCategory', {
+      this.$store.dispatch('items/createItem', {
         name: this.name,
         description: this.description,
-        image: this.image,
+        price: parseFloat(this.price),
+        category: this.category,
       });
       this.dialog = false;
       this.description = '';
       this.name = '';
-      this.image = '';
+      this.price = 0;
+      this.category = '';
       this.$refs.form.reset();
     }
   }

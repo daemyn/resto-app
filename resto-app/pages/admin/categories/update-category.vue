@@ -6,13 +6,12 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="primary"
           fab
           small
           v-bind="attrs"
           v-on="on"
         >
-          <v-icon color="white">mdi-pencil</v-icon>
+          <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </template>
 

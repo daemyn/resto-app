@@ -1,22 +1,23 @@
 <template>
-  <div class="text-left">
+  <div class="text-left d-inline">
     <v-dialog
       v-model="dialog"
       width="500"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="primary"
+          fab
+          small
           v-bind="attrs"
           v-on="on"
         >
-          New Category
+          <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </template>
 
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          Create a new category
+          Update item
         </v-card-title>
 
         <v-card-text class="mt-4">
@@ -32,6 +33,14 @@
               required
             ></v-text-field>
 
+            <v-select
+              v-model="category"
+              :items="selectCategories"
+              :rules="categoryRules"
+              label="Category"
+              required
+            ></v-select>
+
             <v-text-field
               v-model="description"
               label="Description"
@@ -39,10 +48,11 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="image"
-              label="Image"
+              v-model="price"
+              label="Price"
               required
             ></v-text-field>
+
           </v-form>
         </v-card-text>
 
@@ -64,33 +74,47 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  name: 'create-category',
+  name: 'update-item',
+  props: ['item'],
+  mounted() {
+    this.$store.dispatch('categories/fetchCategories');
+  },
+  computed: {
+    ...mapState('categories', ['list']),
+    selectCategories: function() {
+      return this.list.map(c => ({ text: c.name, value: c._id }));
+    },
+  },
   data () {
     return {
       dialog: false,
       valid: true,
-      name: '',
+      name: this.$props.item.name,
       nameRules: [
         v => !!v || 'Name is required',
       ],
-      description: '',
-      image: '',
+      categoryRules: [
+        v => !!v || 'Category is required',
+      ],
+      description: this.$props.item.description,
+      price: this.$props.item.price,
+      category: this.$props.item.category,
     }
   },
   methods: {
     submit() {
       if(!this.$refs.form.validate()) return;
-      this.$store.dispatch('categories/createCategory', {
+      this.$store.dispatch('items/updateItem', {
+        _id: this.$props.item._id,
         name: this.name,
         description: this.description,
-        image: this.image,
+        category: this.category,
+        price: parseFloat(this.price),
       });
       this.dialog = false;
-      this.description = '';
-      this.name = '';
-      this.image = '';
-      this.$refs.form.reset();
     }
   }
 }
