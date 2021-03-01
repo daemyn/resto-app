@@ -48,6 +48,16 @@ export class ItemsController {
     return items;
   }
 
+  @Get('/category/:id')
+  @ApiResponse({
+    description: 'Retrieves items by category.',
+    type: [ItemDto],
+  })
+  async findByCategory(@Param('id') id: string): Promise<IItem[]> {
+    const items = await this.itemsService.findBy({ category: id });
+    return items;
+  }
+
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
   @ApiBearerAuth()

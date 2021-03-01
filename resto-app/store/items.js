@@ -24,6 +24,10 @@ export const actions = {
     const items = await this.$axios.$get('/items');
     commit('setItems', items);
   },
+  async fetchItemsByCategory ({ commit }, categoryId) {
+    const items = await this.$axios.$get(`/items/category/${categoryId}`);
+    commit('setItems', items);
+  },
   async createItem ({ commit }, payload) {
     const item = await this.$axios.$post('/items', payload);
     commit('addItem', item);

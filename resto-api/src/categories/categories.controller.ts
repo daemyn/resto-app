@@ -40,7 +40,6 @@ export class CategoriesController {
     return category;
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('/')
   @ApiResponse({
     description: 'Retrieves all categories.',

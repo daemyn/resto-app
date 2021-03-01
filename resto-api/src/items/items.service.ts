@@ -18,6 +18,10 @@ export class ItemsService {
     return this.itemModel.find({}).exec();
   }
 
+  async findBy(filter): Promise<Item[]> {
+    return this.itemModel.find(filter).exec();
+  }
+
   async find(id: string): Promise<Item> {
     return this.itemModel.findById(id).exec();
   }
