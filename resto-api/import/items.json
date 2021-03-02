@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "603ccbda1e5d67549453e98f"
+  },
+  "name": "Pizza Margherita",
+  "description": "with mozzarella and tomato sauce",
+  "price": 6.9,
+  "category": {
+    "$oid": "603cc9971e5d67549453e988"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603ccc0d1e5d67549453e990"
+  },
+  "name": "Pizza Tonno e Cipolla",
+  "description": "with tuna, onions and tomato sauce",
+  "price": 8.9,
+  "category": {
+    "$oid": "603cc9971e5d67549453e988"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603ccc2d1e5d67549453e991"
+  },
+  "name": "Pizza Salami",
+  "description": "with mild salami and tomato sauce",
+  "price": 7.9,
+  "category": {
+    "$oid": "603cc9971e5d67549453e988"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603ccc6f1e5d67549453e992"
+  },
+  "name": "Hamburger",
+  "description": "classic burger",
+  "price": 5,
+  "category": {
+    "$oid": "603cc9ad1e5d67549453e989"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603ccc811e5d67549453e993"
+  },
+  "name": "Cheeseburger",
+  "description": "with cheese",
+  "price": 6.5,
+  "category": {
+    "$oid": "603cc9ad1e5d67549453e989"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603cccc51e5d67549453e994"
+  },
+  "name": "Chicken-Burger",
+  "description": "with crispy chicken",
+  "price": 6,
+  "category": {
+    "$oid": "603cc9ad1e5d67549453e989"
+  },
+  "__v": 0
+}]

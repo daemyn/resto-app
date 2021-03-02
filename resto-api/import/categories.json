@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "603cc9971e5d67549453e988"
+  },
+  "name": "Pizza",
+  "description": "Our Pizza",
+  "image": "pizza.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603cc9ad1e5d67549453e989"
+  },
+  "name": "Burgers",
+  "description": "Our Burgers",
+  "image": "burger.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603cca251e5d67549453e98a"
+  },
+  "name": "Sushi",
+  "description": "Our Sushi",
+  "image": "sushi.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603cca5c1e5d67549453e98b"
+  },
+  "name": "Döner",
+  "description": "Our Döner",
+  "image": "doner.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603d27bae4834325a8596af1"
+  },
+  "name": "Pasta",
+  "description": "Our Pasta",
+  "image": "pasta.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "603d27f1e4834325a8596af2"
+  },
+  "name": "Dessert",
+  "description": "Our Dessert",
+  "image": "dessert.jpg",
+  "__v": 0
+}]
